@@ -26,9 +26,15 @@
 
     {% for task in tasks %}
 
-        <p>{{ task }}</p>
+<p>
+    {{ task }}
 
-    {% endfor %}
+    <a href="/delete/{{ loop.index0 }}">
+        Delete
+    </a>
+</p>
+
+{% endfor %}
 
 </body>
 
