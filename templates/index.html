@@ -1,40 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Study Planner</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>Study Planner</h1>
+    <div class="container">
 
-    <form method="POST">
+        <h1>📚 Study Planner</h1>
 
-        <input
-            type="text"
-            name="task"
-            placeholder="Enter Task">
+        <form method="POST">
 
-        <button type="submit">
-            Add Task
-        </button>
+            <input
+                type="text"
+                name="task"
+                placeholder="Enter a task"
+                required>
 
-    </form>
+            <button type="submit">
+                Add Task
+            </button>
 
-    <hr>
+        </form>
 
-    {% for task in tasks %}
+        <div class="task-list">
 
-<p>
-    {{ task }}
+            {% if tasks %}
 
-    <a href="/delete/{{ loop.index0 }}">
-        Delete
-    </a>
-</p>
+                {% for task in tasks %}
 
-{% endfor %}
+                    <div class="task-card">
+
+                        {{ task }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No tasks yet.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
 
 </body>
 

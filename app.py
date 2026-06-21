@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -8,15 +8,16 @@ tasks = []
 def home():
 
     if request.method == "POST":
-        task = request.form["task"]
-        tasks.append(task)
 
-    return render_template("index.html", tasks=tasks)
+        task = request.form.get("task")
 
-@app.route("/delete/<int:index>")
-def delete(index):
-    tasks.pop(index)
-    return redirect("/")
+        if task:
+            tasks.append(task)
+
+    return render_template(
+        "index.html",
+        tasks=tasks
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
