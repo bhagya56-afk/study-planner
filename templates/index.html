@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
 
     <title>Study Planner</title>
 
@@ -17,48 +12,53 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>📚 Study Planner</h1>
+    <h1>📚 Study Planner</h1>
 
-        <form method="POST">
+    <form action="/add" method="POST">
 
-            <input
-                type="text"
-                name="task"
-                placeholder="Enter a task"
-                required>
+        <input
+            type="text"
+            name="task"
+            placeholder="Enter a task"
+            required>
 
-            <button type="submit">
-                Add Task
-            </button>
+        <button type="submit">
+            Add Task
+        </button>
 
-        </form>
+    </form>
 
-        <div class="task-list">
+    <div class="task-list">
 
-            {% if tasks %}
+        {% for task in tasks %}
 
-                {% for task in tasks %}
+        <div class="task-card">
 
-                    <div class="task-card">
+            <span class="{% if task.completed %}completed{% endif %}">
+                {{ task.text }}
+            </span>
 
-                        {{ task }}
+            <div>
 
-                    </div>
+                <a href="/complete/{{ loop.index0 }}">
+                    ✔
+                </a>
 
-                {% endfor %}
+                <a href="/delete/{{ loop.index0 }}">
+                    🗑
+                </a>
 
-            {% else %}
-
-                <p>No tasks yet.</p>
-
-            {% endif %}
+            </div>
 
         </div>
 
+        {% endfor %}
+
     </div>
 
-</body>
+</div>
 
+</body>
 </html>
